@@ -49,7 +49,14 @@ class BooksApp extends React.Component {
     //   })
     // });
 
-    BooksAPI.update(book, newShelf);
+    // BooksAPI.update(book, newShelf);
+    BooksAPI.update(book, newShelf)
+      .then(() => {
+        this.setState({ myBooks: books });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   search = query => {
