@@ -8,8 +8,11 @@ class SearchBooks extends React.Component {
   };
 
   updateQuery = query => {
-    this.setState({ query: query.trim() });
-    this.props.onSearchBooks(this.state.query);
+    this.setState({ query: query }, () => { // 传入一个函数作为 setState 第二个参数
+      if (this.state.query.trim()) {
+        this.props.onSearchBooks(this.state.query.trim()); //发起搜索时才去掉两边的空白字符
+      }
+    });
   };
 
   getFixedResult = (myBooks, searchResult) => {
